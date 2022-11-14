@@ -70,6 +70,9 @@ class Vector:
         vec = Vector(i, j, k)
         return vec
 
+    def __imul__(self, other):
+        pass
+
 
 class Points:
     def __init__(self):
@@ -89,10 +92,10 @@ class Points:
 
 class Vectors:
     def __init__(self):
-        self.vectors = []
+        self.vectors = {}
 
     def add_vec(self, vec: Vector):
-        self.vectors.append(vec)
+        self.vectors[vec.name] = vec
 
     def find(self, a: Point, b: Point):
         vec = Vector(a.x - b.x, a.y - b.y, a.z - b.z, a.name + b.name)
@@ -111,9 +114,8 @@ class Vectors:
 def main():
     a = Vector(1, 2, 3)
     b = Vector(3, 2, 1, 'b')
-    c = a + b
-    c.add_name('c')
-    print(c.show())
+    s = 'a+b'
+    print()
 
 
 if __name__ == '__main__':

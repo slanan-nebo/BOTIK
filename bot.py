@@ -136,9 +136,18 @@ def find_vec(message):
 
 
 def read(message):
-    bot.send_message(message.chat.id, "Пока недоступно")
-    operation_choose(message)
+    try:
+        m = message.text.strip()
+        c = eval(m)
+        c.add_name('c')
+        bot.send_message(message.chat.id, c.show)
+    except NameError:
+        pass
 
 
 # Запускаем бота
 bot.polling(none_stop=True, interval=0)
+
+
+
+
