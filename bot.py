@@ -1,12 +1,11 @@
 from random import random
 
-import telebot
 from telebot import *
 
 from data import *
 
 code = '5600321198:AAHVWmPCagBxmo102LW6EMUR8wTnguzphoY'
-bot = telebot.TeleBot(code)
+bot = TeleBot(code)
 V = Vectors()
 P = Points()
 
