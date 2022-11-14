@@ -27,7 +27,7 @@ class Base:
 
 
 class Point:
-    def __init__(self, x, y, z, name):
+    def __init__(self, x, y, z=0, name='a'):
         self.name = name.upper()
         self.x = x
         self.y = y
@@ -38,7 +38,7 @@ class Point:
 
 
 class Vector:
-    def __init__(self, x, y, z, name='a'):
+    def __init__(self, x, y, z=0, name='a'):
         self.name = name.lower()
         self.x = x
         self.y = y
