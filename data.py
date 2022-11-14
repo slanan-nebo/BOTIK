@@ -79,7 +79,7 @@ class Points:
         self.points[point.name] = point
 
     def show(self):
-        m = "POINTS: \n"
+        m = "ТОЧКИ: \n"
         if len(self.points) == 0:
             return ''
         for point in self.points.keys():
@@ -100,7 +100,7 @@ class Vectors:
         return vec
 
     def show(self):
-        m = "VECTORS: \n"
+        m = "ВЕКТОРЫ: \n"
         if len(self.vectors) == 0:
             return ''
         for vec in self.vectors:
@@ -111,7 +111,7 @@ class Vectors:
 def main():
     a = Vector(1, 2, 3)
     b = Vector(3, 2, 1, 'b')
-    c = a * b
+    c = a + b
     c.add_name('c')
     print(c.show())
 
