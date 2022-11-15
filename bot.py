@@ -51,7 +51,7 @@ def operation_choose(message):
 
 def operations(message):
     if message.text.strip() == Base.operations[0]:
-        if len(P.points) > 2:
+        if len(P.points) >= 2:
             bot.send_message(message.chat.id, "Выберите координаты начала и конца вектора и запишите их без пробелов",
                              reply_markup=types.ReplyKeyboardRemove())
             bot.send_message(message.chat.id, P.show())
@@ -90,7 +90,7 @@ def get_vec(message):
         if len(args) > 3:
             vec = Vector(*cords, args[3])
         else:
-            vec = Vector(*cords, 'a')
+            vec = Vector(*cords)
         V.add_vec(vec)
         bot.send_message(message.chat.id, "Вектор создан")
         bot.send_message(message.chat.id, V.show() + P.show())
@@ -110,7 +110,6 @@ def get_point(message):
         else:
             name = random.choice(Base.names)
             Base.names = Base.names.replace(name, '')
-            print(Base.names)
         point = Point(*cords, name)
         P.add_point(point)
         bot.send_message(message.chat.id, "Точка создана")

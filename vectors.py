@@ -107,8 +107,8 @@ class Vectors:
         m = "ВЕКТОРЫ: \n"
         if len(self.vectors) == 0:
             return ''
-        for vec in self.vectors:
-            m += vec.show() + "\n"
+        for vec in self.vectors.keys():
+            m += self.vectors.get(vec).show() + "\n"
         return m
 
 
