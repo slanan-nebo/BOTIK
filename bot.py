@@ -3,6 +3,7 @@ from random import random
 from telebot import *
 
 from data import *
+from vectors import *
 
 code = '5600321198:AAHVWmPCagBxmo102LW6EMUR8wTnguzphoY'
 bot = TeleBot(code)
@@ -139,7 +140,7 @@ def read(message):
     try:
         m = message.text.strip()
         c = eval(m)
-        c.add_name('c')
+        c.change_name('c')
         bot.send_message(message.chat.id, c.show)
     except NameError:
         pass
@@ -147,7 +148,3 @@ def read(message):
 
 # Запускаем бота
 bot.polling(none_stop=True, interval=0)
-
-
-
-
