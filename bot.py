@@ -57,6 +57,8 @@ def add_obj(message):
         bot.register_next_step_handler(message, get_point)
     elif message.text.strip() == Base.add_actions[2]:
         main_menu(message)
+    else:
+        add_choose(message)
 
 
 def get_vec(message):
@@ -126,6 +128,8 @@ def operations(message):
         operation_choose(message)
     elif message.text.strip() == Base.operations[3]:
         main_menu(message)
+    else:
+        operation_choose(message)
 
 
 def find_vec(message):
