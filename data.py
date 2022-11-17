@@ -43,6 +43,4 @@ class Base:
     help = "Длина вектора:          |a|\n" \
            "Сумма векторов:         a+b\n" \
            "Произведение векторов:  a*b"
-
-    # ----------======== vectors.py ========----------
     names = "abcdefghijklmnopqrstuvwxyz"

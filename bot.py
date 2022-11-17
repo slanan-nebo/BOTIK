@@ -5,12 +5,12 @@ from random import random
 from telebot import *
 
 from data import *
-from vectors import *
 
 code = '5600321198:AAHVWmPCagBxmo102LW6EMUR8wTnguzphoY'
 bot = TeleBot(code)
-V = Vectors()
-P = Points()
+
+Vectors = {}
+Points = {}
 
 
 @bot.message_handler(commands=["start"])
@@ -67,12 +67,13 @@ def get_vec(message):
         args = list(message.text.split())
         cords = map(int, args[:3])
         if len(args) > 3:
-            vec = Vector(*cords, args[3])
+            name = args[3]
         else:
-            vec = Vector(*cords)
-        V.add_vec(vec)
+            name = random.choice(Base.names)
+            Base.names = Base.names.replace(name, '')
+        t.Vectors[name.upper()] = cords
         bot.send_message(message.chat.id, Base.read_vec_completed)
-        bot.send_message(message.chat.id, V.show() + P.show())
+        bot.send_message(message.chat.id, str(t.Vectors))
         main_menu(message)
 
     except ValueError:
@@ -90,10 +91,9 @@ def get_point(message):
         else:
             name = random.choice(Base.names)
             Base.names = Base.names.replace(name, '')
-        point = Point(*cords, name)
-        P.add_point(point)
-        bot.send_message(message.chat.id, Base.read_point_completed)
-        bot.send_message(message.chat.id, V.show() + P.show())
+        t.Points[name.upper()] = cords
+        bot.send_message(message.chat.id, str(Base.read_point_completed))
+        bot.send_message(message.chat.id, str(t.Points))
         main_menu(message)
 
     except ValueError:
@@ -112,39 +112,41 @@ def operation_choose(message):
 
 def operations(message):
     """ Функция  анализирует ответы пользователя в меню выбора и запускает функции решения задач """
-    if message.text.strip() == Base.operations[0]:
-        if len(P.points) >= 2:
-            bot.send_message(message.chat.id, Base.find_vec, reply_markup=types.ReplyKeyboardRemove())
-            bot.send_message(message.chat.id, P.show())
-            bot.register_next_step_handler(message, find_vec)
-        else:
-            bot.send_message(message.chat.id, Base.find_vec_error)
-            add_choose(message)
-    elif message.text.strip() == Base.operations[1]:
-        bot.send_message(message.chat.id, Base.read_expression, reply_markup=types.ReplyKeyboardRemove())
-        bot.register_next_step_handler(message, read)
-    elif message.text.strip() == Base.operations[2]:
-        bot.send_message(message.chat.id, Base.help, reply_markup=types.ReplyKeyboardRemove())
-        operation_choose(message)
-    elif message.text.strip() == Base.operations[3]:
-        main_menu(message)
-    else:
-        operation_choose(message)
+    # if message.text.strip() == Base.operations[0]:
+    #     if len(P.points) >= 2:
+    #         bot.send_message(message.chat.id, Base.find_vec, reply_markup=types.ReplyKeyboardRemove())
+    #         bot.send_message(message.chat.id, P.show())
+    #         bot.register_next_step_handler(message, find_vec)
+    #     else:
+    #         bot.send_message(message.chat.id, Base.find_vec_error)
+    #         add_choose(message)
+    # elif message.text.strip() == Base.operations[1]:
+    #     bot.send_message(message.chat.id, Base.read_expression, reply_markup=types.ReplyKeyboardRemove())
+    #     bot.register_next_step_handler(message, read)
+    # elif message.text.strip() == Base.operations[2]:
+    #     bot.send_message(message.chat.id, Base.help, reply_markup=types.ReplyKeyboardRemove())
+    #     operation_choose(message)
+    # elif message.text.strip() == Base.operations[3]:
+    #     main_menu(message)
+    # else:
+    #     operation_choose(message)
+    pass
 
 
 def find_vec(message):
     """ Функция нахождения и создания вектора """
-    try:
-        points = message.text[:2].upper()
-        a = P.points.get(points[0])
-        b = P.points.get(points[1])
-        vec = V.find(a, b)
-        bot.send_message(message.chat.id, Base.find_vec_completed + vec.show())
-        bot.send_message(message.chat.id, V.show() + P.show())
-        operation_choose(message)
-    except ValueError:
-        bot.send_message(message.chat.id, Base.find_vec_error_name)
-        bot.register_next_step_handler(message, find_vec)
+    # try:
+    #     points = message.text[:2].upper()
+    #     a = P.points.get(points[0])
+    #     b = P.points.get(points[1])
+    #     vec = V.find(a, b)
+    #     bot.send_message(message.chat.id, Base.find_vec_completed + vec.show())
+    #     bot.send_message(message.chat.id, V.show() + P.show())
+    #     operation_choose(message)
+    # except ValueError:
+    #     bot.send_message(message.chat.id, Base.find_vec_error_name)
+    #     bot.register_next_step_handler(message, find_vec)
+    pass
 
 
 def read(message):
