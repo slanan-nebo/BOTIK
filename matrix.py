@@ -20,7 +20,7 @@ class Matrix:
 """mat = Matrix(3, 3, 'SLAVA')
 print(mat.show())"""
 
-c = [[1, 2, 3], [0, 5, 6], [0, 0, 9]]
+c = [[1, 2, 3, 8], [0, 5, 6, 7], [0, 0, 9, 8], [0, 0, 0, 1]]
 
 
 def linear(some_list):
@@ -53,9 +53,10 @@ def det(c: list):
         return c[0][0] * c[1][1] - c[1][0] * c[0][1]
     ans = 0
     row = 0
-    for col in range(len(c)):
-        ans += ((-1) ** (row + col + 1)) * c[row][col] * det(support_matrix(c, row, col))
+    for col in range(len(c)-1):
+        ans += ((-1) ** (row + col)) * c[row][col] * det(support_matrix(c, row, col))
         print(f'===>{ans}')
     return ans
+
 
 print(det(c))
